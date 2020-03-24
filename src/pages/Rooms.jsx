@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { Hero } from '../components/Hero';
+import { Banner } from '../components/Banner';
+import {Link} from "react-router-dom";
 
 export const Rooms = () => {
     return (
-        <div>
-            Hello from rooms Component
-        </div>
+       <Fragment>
+         <Hero  hero="roomsHero">
+             <Banner title="Our Rooms">
+                <Link to="/" className="btn-primary">return home</Link>
+             </Banner>
+         </Hero>
+       </Fragment>
     )
 }

@@ -1,24 +1,28 @@
-import React, { Fragment, useState } from 'react';
+import React from 'react';
 
 const RoomContext = React.createContext();
+export const RoomProvider = RoomContext.Provider;
 
-const RoomProvier = ({ children }) => {
-    const [greeting, setGreeting] = useState("Hello context");
-    const [name, setName] = useState("React");
+export default RoomContext;
 
-    return (
-        <Fragment>
-            <RoomContext.Provider value={{greeting: greeting, name: name}}>
-                {children}
-            </RoomContext.Provider>
-        </Fragment>
-    )
-}
 
-const RoomConsumer = RoomContext.Consumer;
+// const RoomProvier = ({ children }) => {
+//     const [greeting, setGreeting] = useState("Hello context");
+//     const [name, setName] = useState("React");
 
-export {
-    RoomConsumer,
-    RoomContext,
-    RoomProvier
-}
+//     return (
+//         <Fragment>
+//             <RoomContext.Provider value={{greeting: greeting, name: name}}>
+//                 {children}
+//             </RoomContext.Provider>
+//         </Fragment>
+//     )
+// }
+
+// const RoomConsumer = RoomContext.Consumer;
+
+// export {
+//     RoomConsumer,
+//     RoomContext,
+//     RoomProvier
+// }

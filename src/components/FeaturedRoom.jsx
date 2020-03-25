@@ -1,16 +1,32 @@
-import React, { Fragment } from 'react'
-import { RoomConsumer, RoomContext } from '../Context'
+import React, { Fragment, useContext, useEffect } from "react";
+import RoomContext from "../Context";
+import { Loader } from "./Loader";
+import { Rooms } from "./Rooms";
+import { Title } from "./Title";
 
 export const FeaturedRoom = () => {
-    const contextType = RoomContext;
-    const value = this.context;
-    console.log('contextType', value.name)
+  const { rooms, featuredRooms, sortedRooms, loading } = useContext(
+    RoomContext
+  );
 
-    return (
-       <Fragment>
-           <div>
-               Hello from featured Component
-           </div>
-       </Fragment>
-    )
-}
+//   useEffect(() => {
+//     roomsItem()
+//   }, [])
+
+  const roomsItem = () => {
+    return rooms.map(item => {
+      return <Rooms rooms={item} key={item.id} />;
+    });
+  };
+
+  return (
+    <Fragment>
+      <div className="featured-rooms">
+        <Title title="featured rooms" />
+        <div className="featured-rooms-center">
+          {loading ? <Loader /> : roomsItem}
+        </div>
+      </div>
+    </Fragment>
+  );
+};

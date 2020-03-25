@@ -1,24 +1,36 @@
 import React, { Fragment, useState } from 'react';
+import { FeaturedRoom } from './components/FeaturedRoom';
+// import { RoomContext } from './pages/Home';
 
 const RoomContext = React.createContext();
+// const RoomContext = React.createContext();
+export const RoomProvider = RoomContext.Provider;
 
-const RoomProvier = ({ children }) => {
-    const [greeting, setGreeting] = useState("Hello context");
-    const [name, setName] = useState("React");
+export default RoomContext;
 
-    return (
-        <Fragment>
-            <RoomContext.Provider value={{greeting: greeting, name: name}}>
-                {children}
-            </RoomContext.Provider>
-        </Fragment>
-    )
-}
 
-const RoomConsumer = RoomContext.Consumer;
+// const RoomProvier = ({ children }) => {
+//     const [greeting, setGreeting] = useState("Hello context");
+//     const [name, setName] = useState("React");
+//     // const [state, setstate] = useState({
+//     //     greeting: "Hello context",
+//     //     name: "React Hooks"
+//     // });
 
-export {
-    RoomConsumer,
-    RoomContext,
-    RoomProvier
-}
+//     return (
+//         <Fragment>
+//             <RoomContext.Provider value={greeting, name}>
+//                 {children}
+//             </RoomContext.Provider>
+//         </Fragment>
+//     )
+// }
+
+// // const RoomConsumer = RoomContext.Consumer;
+// export {
+//     // RoomConsumer,
+//     RoomContext,
+//     RoomProvier
+
+// }
+

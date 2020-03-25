@@ -1,15 +1,20 @@
-import React, { Fragment } from 'react'
-import { RoomConsumer, RoomContext } from '../Context'
+import React, { Fragment, useContext, useEffect } from 'react'
+import RoomContext  from '../Context';
+
 
 export const FeaturedRoom = () => {
-    const contextType = RoomContext;
-    const value = this.context;
-    console.log('contextType', value.name)
+    const context = useContext(RoomContext)
+    // const value = this.context;
+    // console.log('contextType',contextType)
+
+    useEffect(() => {
+       console.log('conte', context)
+    }, [])
 
     return (
        <Fragment>
            <div>
-               Hello from featured Component
+               Hello from featured Component {context}
            </div>
        </Fragment>
     )

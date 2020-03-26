@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment, useContext } from "react";
 import RoomContext from "../Context";
 import { Loader } from "./Loader";
 import { Rooms } from "./Rooms";
@@ -9,12 +9,8 @@ export const FeaturedRoom = () => {
     RoomContext
   );
 
-//   useEffect(() => {
-//     roomsItem()
-//   }, [])
-
   const roomsItem = () => {
-    return rooms.map(item => {
+    return featuredRooms.map(item => {
       return <Rooms rooms={item} key={item.id} />;
     });
   };
@@ -24,7 +20,7 @@ export const FeaturedRoom = () => {
       <div className="featured-rooms">
         <Title title="featured rooms" />
         <div className="featured-rooms-center">
-          {loading ? <Loader /> : roomsItem}
+          {loading ? <Loader /> : roomsItem()}
         </div>
       </div>
     </Fragment>

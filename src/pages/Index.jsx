@@ -13,18 +13,48 @@ function Index() {
   const [sortedRooms, setSortedRooms] = useState([]);
   const [loading, setloading] = useState(true);
 
+  const [filterData, setFilterData] = useState({
+    type: "All",
+    maxPrice: 0,
+    minPrice: 0,
+    maxSize: 0,
+    minSize: 0,
+    price: 0,
+    capacity: 0,
+    breakfast: false,
+    pets: false,
+  });
+
+
   useEffect(() => {
+
+    // filterRooms()
     let rooms = formatRoomsData(Data);
     let featuredRooms = rooms.filter(room => room.featured === true);
+
+    let maxPrice = Math.max(...rooms.map(item => item.price));
+    let maxSize = Math.max(...rooms.map(item => item.size))
+
 
     setrooms(rooms);
     setfeaturedRooms(featuredRooms);
     setSortedRooms(rooms);
     setloading(false);
+    setFilterData({
+      ...filterData,
+      maxPrice,
+      maxSize,
+      price: maxPrice, 
+    })
   }, []);
 
+  useEffect(() => {
+    filterRooms()
+  }, [filterData])
+
+
+
   const formatRoomsData = data => {
-    console.log("data :", data);
     let tempData =
       data &&
       data.map(item => {
@@ -38,8 +68,22 @@ function Index() {
     return tempData;
   };
 
+  const handleChange = (event) => {
+   setFilterData({
+     ...filterData,
+     [event.target.name]: event.target.value
+   })
+  }
+
+  const filterRooms = () => {
+    let tempRooms = [...rooms];
+    if(filterData.type !== "All") {
+      tempRooms = tempRooms.filter(item => item.type === filterData.type);
+    }
+    setSortedRooms(tempRooms);
+  }
+
   const getSingleRoomData = slug => {
-    console.log("slug :", slug);
     let room = [...rooms];
     return room.find(item => item.slug === slug);
   };
@@ -52,7 +96,9 @@ function Index() {
           rooms,
           sortedRooms,
           loading,
-          getSingleRoomData: getSingleRoomData
+          getSingleRoomData: getSingleRoomData,
+          handleChange: handleChange,
+          filterData,
         }}
       >
         <Switch>

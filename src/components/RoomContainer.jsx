@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { RoomFilter } from './RoomFilter';
 import { RoomListing } from './RoomListing';
 import {Loader} from "./Loader";
-import { RoomConsumer, RoomConsumerWrapper } from '../Context';
+import { RoomConsumerWrapper } from '../Context';
 
 const RoomContainer = ({context}) => {
 

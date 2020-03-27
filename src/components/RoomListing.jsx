@@ -2,7 +2,6 @@ import React, { Fragment } from 'react'
 import { Rooms } from './Rooms'
 
 export const RoomListing = (props) => {
-    console.log('rooms', props.rooms)
     if (props.rooms.length === 0) {
         return (
             <div className="empty-search">

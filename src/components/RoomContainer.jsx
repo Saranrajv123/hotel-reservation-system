@@ -1,14 +1,40 @@
 import React, { Fragment } from 'react';
 import { RoomFilter } from './RoomFilter';
 import { RoomListing } from './RoomListing';
+import {Loader} from "./Loader";
+import { RoomConsumer, RoomConsumerWrapper } from '../Context';
 
-export const RoomContainer = () => {
+const RoomContainer = ({context}) => {
+
+    if(context.loading) {
+        return <Loader />
+    }
     return (
         <Fragment>
-            <div>
-                <RoomFilter />
-                <RoomListing />
-            </div>
+            <RoomFilter rooms={context.rooms}/>
+            <RoomListing rooms={context.sortedRooms}/>
         </Fragment>
+       
     )
 }
+
+export default RoomConsumerWrapper(RoomContainer);
+
+// export const RoomContainer = () => {
+//     return (
+//         <Fragment>
+//             <RoomConsumer>
+//                 {(value) => {
+//                     console.log('value', value)
+//                     return (
+//                         <div>
+//                         <RoomFilter />
+//                         <RoomListing />
+//                     </div>
+//                     )
+//                 }}
+//             </RoomConsumer>
+          
+//         </Fragment>
+//     )
+// }

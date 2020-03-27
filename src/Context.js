@@ -2,6 +2,17 @@ import React from 'react';
 
 const RoomContext = React.createContext();
 export const RoomProvider = RoomContext.Provider;
+export const RoomConsumer = RoomContext.Consumer;
+
+export const RoomConsumerWrapper = (Component) => {
+    return function RoomConsumerInerWrapper(props) {
+        return (
+            <RoomConsumer>
+                {value => <Component {...props} context={value} />}
+            </RoomConsumer>
+        )
+    }
+}
 
 export default RoomContext;
 

@@ -5,7 +5,7 @@ import { Rooms } from "./Rooms";
 import { Title } from "./Title";
 
 export const FeaturedRoom = () => {
-  const { rooms, featuredRooms, sortedRooms, loading } = useContext(
+  const { featuredRooms, loading } = useContext(
     RoomContext
   );
 

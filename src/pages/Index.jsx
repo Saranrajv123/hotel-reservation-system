@@ -20,21 +20,18 @@ function Index() {
     maxSize: 0,
     minSize: 0,
     price: 0,
-    capacity: 0,
+    capacity: 1,
     breakfast: false,
-    pets: false,
+    pets: false
   });
 
-
   useEffect(() => {
-
     // filterRooms()
     let rooms = formatRoomsData(Data);
     let featuredRooms = rooms.filter(room => room.featured === true);
 
     let maxPrice = Math.max(...rooms.map(item => item.price));
-    let maxSize = Math.max(...rooms.map(item => item.size))
-
+    let maxSize = Math.max(...rooms.map(item => item.size));
 
     setrooms(rooms);
     setfeaturedRooms(featuredRooms);
@@ -44,15 +41,13 @@ function Index() {
       ...filterData,
       maxPrice,
       maxSize,
-      price: maxPrice, 
-    })
+      price: maxPrice
+    });
   }, []);
 
   useEffect(() => {
-    filterRooms()
-  }, [filterData])
-
-
+    filterRooms();
+  }, [filterData]);
 
   const formatRoomsData = data => {
     let tempData =
@@ -68,20 +63,42 @@ function Index() {
     return tempData;
   };
 
-  const handleChange = (event) => {
-   setFilterData({
-     ...filterData,
-     [event.target.name]: event.target.value
-   })
-  }
+  const handleChange = event => {
+    setFilterData({
+      ...filterData,
+      [event.target.name]: event.target.value
+    });
+  };
 
   const filterRooms = () => {
     let tempRooms = [...rooms];
-    if(filterData.type !== "All") {
+    console.log("capacity", filterData.capacity);
+    if (filterData.type !== "All") {
       tempRooms = tempRooms.filter(item => item.type === filterData.type);
     }
+    if (filterData.capacity !== 1) {
+      tempRooms = tempRooms.filter(
+        item => item.capacity >= filterData.capacity
+      );
+    }
+
+    tempRooms = tempRooms.filter(item => item.price <= filterData.price);
+
+    tempRooms = tempRooms.filter(
+      item =>
+        item.size >= filterData.minPrice && item.size <= filterData.maxPrice
+    );
+
+    if (filterData.breakfast) {
+      tempRooms = tempRooms.filter(item => item.breakfast === true);
+    }
+
+    if (filterData.pets) {
+      tempRooms = tempRooms.filter(item => item.pets === true);
+    }
+
     setSortedRooms(tempRooms);
-  }
+  };
 
   const getSingleRoomData = slug => {
     let room = [...rooms];
@@ -98,7 +115,7 @@ function Index() {
           loading,
           getSingleRoomData: getSingleRoomData,
           handleChange: handleChange,
-          filterData,
+          filterData
         }}
       >
         <Switch>

@@ -23,10 +23,10 @@ export const RoomListing = (props) => {
             </section>
         )
     }
-    
+
     return (
         <Fragment>
-           {renderRooms()}
+            {renderRooms()}
         </Fragment>
     )
 }
